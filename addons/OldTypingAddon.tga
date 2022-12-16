@@ -1,0 +1,140 @@
+; ------------------ AHK setup -------------------
+
+#NoEnv
+#SingleInstance, Force
+SendMode, Input
+SetBatchLines, -1
+SetWorkingDir, %A_ScriptDir%
+
+; ------------------- Config ----------------------
+
+AddonName = TypeGreek Windows old typing addon
+infoUrl = "https://stickypiston-development.github.io/typegreek-windows/"
+
+; ------------------ Tray menu --------------------
+
+Menu, Tray, Tip , %AddonName%                           ;Change name
+Menu, Tray, NoStandard                                  ;Remove default options
+Menu, Tray, Icon, ./../icon.ico                         ;Set icon
+Menu, Tray, Add, Addon Info, Info                       ;Addon info
+Menu, Tray, Add, Exit addon, Exit                       ;Exit
+
+MsgBox, 0, %AddonName%, %AddonName% has been loaded!    ;Notify user
+
+; ------------------ Addon code --------------------
+
+;----Epsilon/Eta
++e::
+Send {U+0395}
+while(getkeystate("E", "P"))
+	if(getkeystate("T", "P"))
+	{
+		send {BS}
+		Send {U+0397}
+	}
+return
+e::
+Send {U+03B5}
+while(getkeystate("E", "P"))
+	if(getkeystate("T", "P"))
+	{
+		send {BS}
+		Send {U+03B7}
+	}
+return
+
+;----Mu
++m::
+if(!getkeystate("O", "P"))
+	Send {U+039C}
+return
+m::
+if(!getkeystate("O", "P"))
+	Send {U+03BC}
+return
+
+;----Omicron/Omega
++o::
+Send {U+039F}
+while(getkeystate("O", "P"))
+	if(getkeystate("M", "P"))
+	{
+		send {BS}
+		Send {U+03A9}
+	}
+return
+o::
+Send {U+03BF}
+while(getkeystate("O", "P"))
+	if(getkeystate("M", "P"))
+	{
+		send {BS}
+		Send {U+03C9}
+	}
+return
+;----Pi
+p & i::
+if(getkeystate("Shift", "P"))
+	Send {U+03A0}
+else
+	Send {U+03C0}
+return
+
+return
+;----Tau/Theta
++t::
+if(!getkeystate("E", "P"))
+{
+	Send {U+03A4}
+	while(getkeystate("T", "P"))
+		if(getkeystate("H", "P"))
+		{
+			send {BS 2}
+			Send {U+0398}
+			return
+		}
+}
+return
+t::
+if(!getkeystate("E", "P"))
+{
+	Send {U+03C4}
+	while(getkeystate("T", "P"))
+		if(getkeystate("H", "P"))
+		{
+			send {BS 2}
+			Send {U+03B8}
+			return
+		}
+}
+return
+
+;----Phi
+p & h::
+if(getkeystate("Shift", "P"))
+	Send {U+03A6}
+else
+	Send {U+03C6}
+return
+
+;----Psi
+p & s::
+if(getkeystate("Shift", "P"))
+	Send {U+03A8}
+else
+	Send {U+03C8}
+return
+
+
+
+; ------------------ Menu Code ---------------------
+
+Exit:
+ExitApp
+return
+
+Info:
+MsgBox, 1, %AddonName%, Opening info in the browser (Chrome)
+IfMsgBox, OK
+    Run, chrome.exe "%infoURL%" " --new-window "
+return
