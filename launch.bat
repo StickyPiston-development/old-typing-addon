@@ -1,1 +1,1 @@
-start AutoHotKeyU32.exe typegreek_EN.ahk
+start AutoHotKeyU32.exe load.ahk
