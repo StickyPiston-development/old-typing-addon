@@ -125,6 +125,8 @@ else
 	Send {U+03C8}
 return
 
+; ------------------ Menu Code ---------------------
+
 ~^+!t::
 Suspend, Toggle
 IF A_ISSUSPENDED = 1
@@ -132,8 +134,6 @@ Menu, tray, icon, disabled_icon.ico, , 1
 else if A_ISSUSPENDED = 0
 Menu, tray, icon, icon.ico, , 1
 return
-
-; ------------------ Menu Code ---------------------
 
 Exit:
 ExitApp
